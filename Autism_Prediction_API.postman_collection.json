@@ -1,0 +1,143 @@
+{
+  "info": {
+    "name": "Autism Prediction API",
+    "description": "Collection para probar la API de Predicción de Autismo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        },
+        "description": "Verifica el estado de la API y los modelos cargados"
+      }
+    },
+    {
+      "name": "Root",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": ["{{base_url}}"],
+          "path": [""]
+        },
+        "description": "Información básica de la API"
+      }
+    },
+    {
+      "name": "Features Info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/features/info",
+          "host": ["{{base_url}}"],
+          "path": ["features", "info"]
+        },
+        "description": "Obtiene información sobre las características esperadas y valores válidos"
+      }
+    },
+    {
+      "name": "Predict - No ASD",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"A1_Score\": 0,\n  \"A2_Score\": 0,\n  \"A3_Score\": 0,\n  \"A4_Score\": 0,\n  \"A5_Score\": 0,\n  \"A6_Score\": 0,\n  \"A7_Score\": 0,\n  \"A8_Score\": 0,\n  \"A9_Score\": 0,\n  \"A10_Score\": 0,\n  \"age\": 47,\n  \"gender\": \"m\",\n  \"ethnicity\": \"?\",\n  \"jaundice\": \"no\",\n  \"austim\": \"no\",\n  \"contry_of_res\": \"India\",\n  \"used_app_before\": \"no\",\n  \"result\": 2.26,\n  \"relation\": \"Self\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/predict",
+          "host": ["{{base_url}}"],
+          "path": ["predict"]
+        },
+        "description": "Predicción para un caso sin autismo (todos los scores en 0)"
+      }
+    },
+    {
+      "name": "Predict - ASD",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"A1_Score\": 1,\n  \"A2_Score\": 1,\n  \"A3_Score\": 1,\n  \"A4_Score\": 1,\n  \"A5_Score\": 1,\n  \"A6_Score\": 1,\n  \"A7_Score\": 1,\n  \"A8_Score\": 1,\n  \"A9_Score\": 1,\n  \"A10_Score\": 1,\n  \"age\": 7,\n  \"gender\": \"m\",\n  \"ethnicity\": \"White-European\",\n  \"jaundice\": \"no\",\n  \"austim\": \"yes\",\n  \"contry_of_res\": \"United States\",\n  \"used_app_before\": \"no\",\n  \"result\": 14.85,\n  \"relation\": \"Self\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/predict",
+          "host": ["{{base_url}}"],
+          "path": ["predict"]
+        },
+        "description": "Predicción para un caso con autismo (todos los scores en 1)"
+      }
+    },
+    {
+      "name": "Predict - Mixed",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"A1_Score\": 1,\n  \"A2_Score\": 0,\n  \"A3_Score\": 1,\n  \"A4_Score\": 0,\n  \"A5_Score\": 1,\n  \"A6_Score\": 0,\n  \"A7_Score\": 1,\n  \"A8_Score\": 0,\n  \"A9_Score\": 1,\n  \"A10_Score\": 1,\n  \"age\": 38,\n  \"gender\": \"f\",\n  \"ethnicity\": \"White-European\",\n  \"jaundice\": \"no\",\n  \"austim\": \"no\",\n  \"contry_of_res\": \"United States\",\n  \"used_app_before\": \"no\",\n  \"result\": 6.35,\n  \"relation\": \"Self\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/predict",
+          "host": ["{{base_url}}"],
+          "path": ["predict"]
+        },
+        "description": "Predicción para un caso con scores mixtos"
+      }
+    },
+    {
+      "name": "Predict - Invalid Age",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"A1_Score\": 1,\n  \"A2_Score\": 0,\n  \"A3_Score\": 1,\n  \"A4_Score\": 0,\n  \"A5_Score\": 1,\n  \"A6_Score\": 0,\n  \"A7_Score\": 1,\n  \"A8_Score\": 0,\n  \"A9_Score\": 1,\n  \"A10_Score\": 1,\n  \"age\": 150,\n  \"gender\": \"f\",\n  \"ethnicity\": \"White-European\",\n  \"jaundice\": \"no\",\n  \"austim\": \"no\",\n  \"contry_of_res\": \"United States\",\n  \"used_app_before\": \"no\",\n  \"result\": 6.35,\n  \"relation\": \"Self\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/predict",
+          "host": ["{{base_url}}"],
+          "path": ["predict"]
+        },
+        "description": "Prueba con edad inválida (debe retornar error 422)"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}

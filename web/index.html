@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASD Predictor - Evaluación de Autismo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5C11.7157 5 5 11.7157 5 20C5 28.2843 11.7157 35 20 35C28.2843 35 35 28.2843 35 20C35 11.7157 28.2843 5 20 5Z" fill="url(#gradient1)"/>
+                        <circle cx="15" cy="18" r="2.5" fill="white"/>
+                        <circle cx="25" cy="18" r="2.5" fill="white"/>
+                        <path d="M15 26C15 26 17 28 20 28C23 28 25 26 25 26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="gradient1" x1="5" y1="5" x2="35" y2="35">
+                                <stop offset="0%" stop-color="#667eea"/>
+                                <stop offset="100%" stop-color="#764ba2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>ASD Predictor</span>
+                </div>
+                <div class="nav-status">
+                    <div class="status-indicator" id="apiStatus">
+                        <div class="status-dot"></div>
+                        <span>Conectando...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="hero">
+            <h1 class="hero-title">
+                Evaluación de <span class="gradient-text">Autismo</span>
+            </h1>
+            <p class="hero-subtitle">
+                Sistema inteligente de evaluación preliminar del Trastorno del Espectro Autista
+            </p>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">🎯</div>
+                    <div class="info-text">
+                        <span class="info-label">Precisión</span>
+                        <span class="info-value">93%</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">⚡</div>
+                    <div class="info-text">
+                        <span class="info-label">Tiempo</span>
+                        <span class="info-value">&lt;1s</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🔒</div>
+                    <div class="info-text">
+                        <span class="info-label">Seguridad</span>
+                        <span class="info-value">100%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-header">
+                    <h2>Cuestionario de Evaluación</h2>
+                    <p>Complete todos los campos para obtener una evaluación preliminar</p>
+                </div>
+
+                <form id="predictionForm">
+                    <!-- Sección de Cuestionario -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h3>📋 Cuestionario AQ-10</h3>
+                            <p>Responda Sí (1) o No (0) a cada pregunta</p>
+                        </div>
+                        
+                        <div class="questions-grid">
+                            <div class="question-item" data-question="1">
+                                <label>
+                                    <span class="question-number">1</span>
+                                    <span class="question-text">¿Prefiere hacer las cosas de la misma manera una y otra vez?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A1_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="2">
+                                <label>
+                                    <span class="question-number">2</span>
+                                    <span class="question-text">¿Le resulta fácil hacer más de una cosa a la vez?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A2_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="3">
+                                <label>
+                                    <span class="question-number">3</span>
+                                    <span class="question-text">¿Encuentra difícil "leer entre líneas" cuando alguien le habla?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A3_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="4">
+                                <label>
+                                    <span class="question-number">4</span>
+                                    <span class="question-text">¿Puede concentrarse en lo que está haciendo ignorando ruidos a su alrededor?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A4_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="5">
+                                <label>
+                                    <span class="question-number">5</span>
+                                    <span class="question-text">¿Nota patrones en cosas todo el tiempo?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A5_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="6">
+                                <label>
+                                    <span class="question-number">6</span>
+                                    <span class="question-text">¿Se siente molesto si no puede hacer las cosas de la manera que normalmente hace?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A6_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="7">
+                                <label>
+                                    <span class="question-number">7</span>
+                                    <span class="question-text">¿Encuentra difícil saber cuándo es su turno de hablar en una conversación?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A7_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="8">
+                                <label>
+                                    <span class="question-number">8</span>
+                                    <span class="question-text">¿Encuentra fácil entender las intenciones de otras personas?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A8_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="9">
+                                <label>
+                                    <span class="question-number">9</span>
+                                    <span class="question-text">¿Le atrae más la gente que los objetos o patrones?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A9_Score" required>
+                            </div>
+
+                            <div class="question-item" data-question="10">
+                                <label>
+                                    <span class="question-number">10</span>
+                                    <span class="question-text">¿Cuando lee una historia, puede imaginar fácilmente lo que los personajes parecen?</span>
+                                </label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn" data-value="0">No</button>
+                                    <button type="button" class="toggle-btn" data-value="1">Sí</button>
+                                </div>
+                                <input type="hidden" name="A10_Score" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información Personal -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h3>👤 Información Personal</h3>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="age">Edad</label>
+                                <input type="number" id="age" name="age" min="1" max="120" required placeholder="Ej: 25">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gender">Género</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="m">Masculino</option>
+                                    <option value="f">Femenino</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ethnicity">Etnicidad</label>
+                                <select id="ethnicity" name="ethnicity" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="White-European">Europeo Blanco</option>
+                                    <option value="Hispanic">Hispano</option>
+                                    <option value="Asian">Asiático</option>
+                                    <option value="Black">Afroamericano</option>
+                                    <option value="South Asian">Sur Asiático</option>
+                                    <option value="Middle Eastern ">Medio Oriente</option>
+                                    <option value="Latino">Latino</option>
+                                    <option value="Turkish">Turco</option>
+                                    <option value="Pasifika">Pacífico</option>
+                                    <option value="Others">Otros</option>
+                                    <option value="?">Prefiero no decir</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contry_of_res">País de Residencia</label>
+                                <input type="text" id="contry_of_res" name="contry_of_res" required placeholder="Ej: United States" list="countries">
+                                <datalist id="countries">
+                                    <option value="Argentina">
+                                    <option value="Australia">
+                                    <option value="Brazil">
+                                    <option value="Canada">
+                                    <option value="Chile">
+                                    <option value="China">
+                                    <option value="Colombia">
+                                    <option value="Germany">
+                                    <option value="India">
+                                    <option value="Mexico">
+                                    <option value="Spain">
+                                    <option value="United Kingdom">
+                                    <option value="United States">
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información Médica -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h3>🏥 Información Médica</h3>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="jaundice">¿Nació con ictericia?</label>
+                                <select id="jaundice" name="jaundice" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="no">No</option>
+                                    <option value="yes">Sí</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="austim">¿Algún familiar tiene autismo?</label>
+                                <select id="austim" name="austim" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="no">No</option>
+                                    <option value="yes">Sí</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="used_app_before">¿Ha usado esta app antes?</label>
+                                <select id="used_app_before" name="used_app_before" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="no">No</option>
+                                    <option value="yes">Sí</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="relation">Relación con el evaluado</label>
+                                <select id="relation" name="relation" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="Self">Yo mismo</option>
+                                    <option value="Parent">Padre/Madre</option>
+                                    <option value="Relative">Familiar</option>
+                                    <option value="Health care professional">Profesional de salud</option>
+                                    <option value="Others">Otros</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="resetBtn">
+                            <span>Limpiar Formulario</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span>Realizar Evaluación</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resultado -->
+            <div class="result-card" id="resultCard" style="display: none;">
+                <div class="result-header">
+                    <h2>Resultado de la Evaluación</h2>
+                    <button class="close-btn" id="closeResult">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="result-content">
+                    <div class="result-icon" id="resultIcon">
+                        <!-- Dynamic icon -->
+                    </div>
+                    
+                    <h3 class="result-title" id="resultTitle"></h3>
+                    <p class="result-subtitle" id="resultSubtitle"></p>
+
+                    <div class="probability-bar">
+                        <div class="probability-label">
+                            <span>Nivel de Confianza</span>
+                            <span id="probabilityValue">--</span>
+                        </div>
+                        <div class="probability-track">
+                            <div class="probability-fill" id="probabilityFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="result-disclaimer">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/>
+                            <path d="M10 6V10M10 14H10.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <p>
+                            <strong>Nota Importante:</strong> Este resultado es solo una evaluación preliminar. 
+                            NO constituye un diagnóstico médico. Si tiene preocupaciones, consulte con un profesional de la salud calificado.
+                        </p>
+                    </div>
+
+                    <button class="btn btn-primary" id="newEvaluation">
+                        Realizar Nueva Evaluación
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 ASD Predictor. Desarrollado con Machine Learning y FastAPI.</p>
+            <p class="footer-disclaimer">Este sistema utiliza un modelo RandomForest con precisión del 93%</p>
+        </div>
+    </footer>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Analizando datos...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
